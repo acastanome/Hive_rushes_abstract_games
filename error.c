@@ -6,7 +6,7 @@
 /*   By: spuustin <spuustin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 15:00:46 by spuustin          #+#    #+#             */
-/*   Updated: 2022/03/17 16:39:01 by acastano         ###   ########.fr       */
+/*   Updated: 2022/03/17 21:01:30 by acastano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,12 @@ int		error(char *str)
 	if (ft_strcmp(str, "strlen") == 0)
 		ft_putstr("your string must be in correct form, please try again.\n");
 	if (ft_strcmp(str, "Occupied") == 0)
-		ft_putstr("Can't build in that square, there is a player! What do you want to do instead?\n");
-	if (ft_strcmp(str, "Dome") == 0)
-		ft_putstr("Can't keep building here, there is a dome! What do you want to do instead?\n");
+		ft_putstr("That square is occupied! What do you want to do instead?\n");
+	if (ft_strcmp(str, "Player not there") == 0)
+		ft_putstr("Can't move from there, there is no player in that position! What do you want to do instead?\n");
+	if (ft_strcmp(str, "Not adjacent") == 0)
+		error("You need to be in an adjacent cell to do that! What do you want to do instead?");
+	if (ft_strcmp(str, "Level height") == 0)
+		error("The height difference between levels is too big! What do you want to do instead?");
 	return (1);
 }
