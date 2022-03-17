@@ -6,7 +6,7 @@
 /*   By: acastano <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 14:34:30 by acastano          #+#    #+#             */
-/*   Updated: 2022/03/17 19:39:23 by acastano         ###   ########.fr       */
+/*   Updated: 2022/03/17 21:20:40 by acastano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,85 @@
  * is_player_id() checks if there is the right player in that square
  * Return values: 1 if there is the correct player, 0 if not.
  */
-int	is_player_id(int square_status, int player)
+int	is_player_id(int square_status, int player_id)
 {
-	if ((square_status / 10) == player)
+	if ((square_status / 10) == player_id)
 		return (1);
 	return (0);
 }
 
-int	ft_move(int *map, int player, int pos1, int pos2)
+//-------------------------------------------------------------------------
+//aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+/*
+ * is_adjacent() takes an int array representing the board (and it's content),
+ * an int representing the index of position 1, and an int representing the index
+ * of the position 2.
+ * It checks if the positions are adjacent.
+ * Return values: 1 if they are, 0 if not.
+ */
+int	is_adjacent(int *map, int pos1, int pos2)
 {
-	if ()
+	if ((square_status / 10) == player_id)//not done
+		return (1);
 	return (0);
+}
+
+/*
+ * height_difference() takes two int representing the index of two positions.
+ * It calculates the difference in heights, taking into account there is a player
+ * in pos1.
+ * Return values: An int greater than, equal to, or less than 0, depending is the
+ * height of pos1 greater than, equal to, or less than the height of pos2.
+ */
+int	height_difference(int pos1, int pos2)
+{
+	return ((pos1 % 10) - pos2);
+}
+
+/*
+ * is_level_ok() takes an int representing the index of the position to move from,
+ * and an int representing the index of the position to move to.
+ * It checks if the difference in heights is according to the rules.
+ * Return values: 1 if they are, 0 if not.
+ */
+int	is_level_ok(int pos1, int pos2)
+{
+	if ((square_status / 10) == player_id)//not done
+		return (1);
+	return (0);
+}
+
+/*
+ * ft_move() takes an int array representing the board (and it's content), an
+ * int representing the player_id, an int representing the index of square we want
+ * to move from, and an int representing the index of square we want to move to.
+ * Return values: Calls error and returns 0 if failed, 1 if it moves.
+ */
+int	ft_move(int *map, int player_id, int pos1, int pos2)
+{
+	if (is_player_id(map[pos1], player_id) == 0)
+	{
+		error("Player not there");
+		return (0);
+	}
+	if (is_position_buildable(map[pos2]) == 0)
+	{
+		error("Occupied");
+		return (0);
+	}
+	if (is_adjacent(map, pos1, pos2) == 0)
+	{
+		error("Not adjacent");
+		return (0);
+	}
+	if (is_level_ok(pos1, pos2) == 0)
+	{
+		error("Level height");
+		return (0);
+	}
+	map[pos1] = map[pos1] - player_id;
+	map[pos2] = map[pos2] + player_id;
+	return (1);
 }
 
 
@@ -56,23 +124,31 @@ int	is_dome(int square_status)
 }
 
 /*
+ * is_position_free() checks if there is already a player or a dome in that square.
+ * Return values: 1 if there is something, 0 if not.
+ */
+int	is_position_buildable(int *map, int position)
+{
+	if ((is_player(map[position]) == 1) || (is_dome(map[position]) == 1))
+		return (1);
+	return (0);
+}
+
+/*
  * ft_build() takes an int array representing the board (and it's content)
  * and an int representing the index of square we want to build in.
  * Return values: Calls error and returns 0 if failed, 1 if it builds.
  */
 int	ft_build(int *board, int index)//Checked before calling build() if you are not moving/if you are winning
 {
-	if (is_player(board[index]) == 1)
-		error("Occupied");
-	else if (is_dome(board[index]) == 1)
-		error ("Dome");
-	else
+	if (is_position_buildable(board[index]) == 0)
 	{
-		//check if player and building place are next to each other
-		board[index] = board[index] + 1;
-		return (1);
+		error ("Occupied");
+		return (0);
 	}
-	return (0);
+	//check if player and building place are next to each other
+	board[index] = board[index] + 1;
+	return (1);
 }
 
 int	main(void)
