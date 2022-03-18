@@ -6,7 +6,7 @@
 /*   By: spuustin <spuustin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 15:22:23 by spuustin          #+#    #+#             */
-/*   Updated: 2022/03/18 21:09:27 by spuustin         ###   ########.fr       */
+/*   Updated: 2022/03/18 23:22:53 by acastano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ int	is_player(int square_status);
 int	is_position_buildable(int position);
 int	is_adjacent(int pos1, int pos2);
 int	is_level_ok(int pos1, int pos2);
-int	height_difference(int pos1, int pos2);
 int	is_dome(int square_status);
 
 //print

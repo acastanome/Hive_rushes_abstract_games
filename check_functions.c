@@ -6,7 +6,7 @@
 /*   By: acastano <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 21:31:02 by acastano          #+#    #+#             */
-/*   Updated: 2022/03/18 19:56:25 by acastano         ###   ########.fr       */
+/*   Updated: 2022/03/18 23:21:04 by acastano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,18 +70,6 @@ int	is_adjacent(int pos1, int pos2)
 }
 
 /*
- * height_difference() takes two int representing the index of two positions.
- * It calculates the difference in heights, taking into account there is a player
- * in pos1.
- * Return values: An int greater than, equal to, or less than 0, depending is the
- * height of pos1 greater than, equal to, or less than the height of pos2.
- */
-int	height_difference(int pos1, int pos2)
-{
-	return ((pos1 % 10) - pos2);
-}
-
-/*
  * is_level_ok() takes an int representing the index of the position to move from,
  * and an int representing the index of the position to move to.
  * It checks if the difference in heights is according to the rules.
@@ -89,9 +77,11 @@ int	height_difference(int pos1, int pos2)
  */
 int	is_level_ok(int pos1, int pos2)
 {
-	if (height_difference(pos1, pos2) > 1)
-		return (0);
-	return (1);
+	if ((pos1 == pos2) || (pos1 > pos2))
+		return (1);
+	if ((pos2 - pos1) == 1)
+		return (1);
+	return (0);
 }
 
 /*

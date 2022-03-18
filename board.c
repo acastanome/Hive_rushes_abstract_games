@@ -6,13 +6,12 @@
 /*   By: spuustin <spuustin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 14:34:30 by acastano          #+#    #+#             */
-/*   Updated: 2022/03/18 21:34:07 by acastano         ###   ########.fr       */
+/*   Updated: 2022/03/18 23:21:46 by acastano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft/libft.h"
 #include "santorini.h"
-#include <stdio.h>
 
 /*
  * ft_move() takes an int array representing the board (and it's content), an
@@ -93,40 +92,3 @@ int	ft_play(int *board, int player_id, int i_move_from, int i_move_to, int i_bui
 	}
 	return (0);
 }
-
-/*
-int	main(void)
-{
-	int	board[25];
-	int	i;
-
-	i = 0;
-	while (i < 25)
-	{
-		board[i] = 0;
-		i++;
-	}
-	board[4] = 10;
-	board[11] = 20;
-	board[24] = 30;
-	i = 0;
-	while (i < 25)
-	{
-		printf("%d ",board[i]);
-		if ((((i + 1) % 5) == 0) && 1 != 0)
-			printf("\n");
-		i++;
-	}
-	ft_play(board, 30, 24, 18, 13);
-	printf("\n");
-	i = 0;
-	while (i < 25)
-	{
-		printf("%d ",board[i]);
-		if ((((i + 1) % 5) == 0) && 1 != 0)
-			printf("\n");
-		i++;
-	}
-	return (0);
-}
-*/
