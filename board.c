@@ -6,7 +6,7 @@
 /*   By: spuustin <spuustin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 14:34:30 by acastano          #+#    #+#             */
-/*   Updated: 2022/03/18 23:21:46 by acastano         ###   ########.fr       */
+/*   Updated: 2022/03/19 00:43:10 by spuustin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,12 @@ int	ft_move(int *board, int player_id, int pos1, int pos2)
 	{
 		board[pos1] = (board[pos1] - player_id);
 		board[pos2] = (board[pos2] + player_id);
+		if (board[pos2] == 13 || board[pos2] == 23 || \
+		board[pos2] == 33 || board[pos2] == 43)
+		{
+			ft_putstr("you have won the game!!!!!\n");
+			exit(-1);	
+		}
 		return (1);
 	}
 	return (0);

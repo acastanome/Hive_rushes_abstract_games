@@ -1,0 +1,6 @@
+// a game that is already won
+S 11.3 11.A 6.C 5.B 25.D
+// a game where one player cant move
+S 1.A 2.B 3.4 6.4 7.4 8.4 23.C 24.D
+// a simple game to start playing from
+S 11.A 15.D 7.B 4.C 17.1 10.4

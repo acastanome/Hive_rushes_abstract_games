@@ -6,7 +6,7 @@
 /*   By: spuustin <spuustin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 15:22:23 by spuustin          #+#    #+#             */
-/*   Updated: 2022/03/18 23:22:53 by acastano         ###   ########.fr       */
+/*   Updated: 2022/03/19 00:48:08 by spuustin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 #include <unistd.h>
 #include "libft/libft.h"
+#include <stdlib.h>
 
 //error.c
 int error(char *str);
@@ -31,13 +32,17 @@ int	is_position_buildable(int position);
 int	is_adjacent(int pos1, int pos2);
 int	is_level_ok(int pos1, int pos2);
 int	is_dome(int square_status);
+int can_plr_move(int *array, int player);
 
 //print
 void	print_state(int *array);
+void	print_board(int *array);
+int		get_pid(int value);
 
 //state
 int		set_stage(int *array, char *buffer);
 void	set_empty_stage(int *array);
+int		is_game_won(int *array);
 
 //turn
 int		turn_parser(char *str, int *array);

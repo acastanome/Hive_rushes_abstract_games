@@ -6,12 +6,28 @@
 /*   By: spuustin <spuustin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 19:58:46 by spuustin          #+#    #+#             */
-/*   Updated: 2022/03/18 23:17:46 by spuustin         ###   ########.fr       */
+/*   Updated: 2022/03/19 00:50:52 by spuustin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "santorini.h"
 
+int is_game_won(int *array)
+{
+	int i = 0;
+	while (i < 25)
+	{
+		if (array[i] == 13 || array[i] == 23 || \
+		array[i] == 33 || array[i] == 43)
+		{
+			ft_putstr("the game you set is already won, try again.\n");
+			set_empty_stage(array);
+			return (1);
+		}
+		i++;
+	}
+	return (0);
+}
 void print_player_on_build(int index, int value)
 {
 	int pid;
@@ -83,7 +99,6 @@ void	populate(int *array)
 void	set_empty_stage(int *array)
 {
 	int i = 0;
-	ft_putstr("setting up an empty state.\n");
 	while (i < 25)
 	{
 		array[i] = 0;

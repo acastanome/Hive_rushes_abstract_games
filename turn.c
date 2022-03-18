@@ -6,7 +6,7 @@
 /*   By: spuustin <spuustin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 10:39:27 by spuustin          #+#    #+#             */
-/*   Updated: 2022/03/18 21:09:51 by spuustin         ###   ########.fr       */
+/*   Updated: 2022/03/19 00:16:09 by spuustin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ int	turn_parser(char *str, int *array)
 	int		move_to;
 	int		build;
 	int		i = 1;
+	int		p = 1;
 
 	if (is_char(str, i, ' ') == 0)
 		return (error("delimiter"));
@@ -44,13 +45,19 @@ int	turn_parser(char *str, int *array)
 		player = player_char_to_id(str[i]);
 	else
 		return (error("player"));
+	if (player == 30 || player == 40)
+		p = 2;
+	can_plr_move(array, p);
 	i++;
 	if (is_char(str, i, ' ') == 0)
 		return (error("delimiter"));
 	i++;
 	move_from = ft_atoi(str + i);
 	if (move_from < 1 || move_from > 25)
-		return (0); //error(from)
+	{
+		ft_putstr("you arent on that square!!\n");
+		return (1);
+	}
 	i += ft_num_length(move_from);
 	if (is_char(str, i, ' ') == 0)
 		return (error("delimiter"));
@@ -59,7 +66,10 @@ int	turn_parser(char *str, int *array)
 	if (move_to < 1 || move_to > 25)
 		return (error("move"));
 	if (move_from == move_to)
-		return(0); //you cant move to where you are at!
+	{
+		ft_putstr("you cant move to the square you are currently on!\n");
+		return (1);
+	}
 	i += ft_num_length(move_to);
 	if (is_char(str, i, ' ') == 0)
 		return (error("delimiter"));
@@ -68,20 +78,14 @@ int	turn_parser(char *str, int *array)
 	if (build < 1 || build > 25)
 		return (error("build"));
 	if (build == move_to)
-		return (0); //you cant build on where you currently are!
+	{
+		ft_putstr("you cant build on top of yourself!\n");
+		return (1);
+	}
 	i += ft_num_length(build);
 	i++;
 	if (i != (int) ft_strlen(str))
 		return (error("strlen"));
-	ft_putstr("player: ");
-	ft_putnbr(player);
-	ft_putstr(", from: ");
-	ft_putnbr(move_from);
-	ft_putstr(", to: ");
-	ft_putnbr(move_to);
-	ft_putstr(", build on: ");
-	ft_putnbr(build);
-	ft_putchar('\n');
 	ft_play(array, player, move_from -1, move_to -1, build -1);
 	return (0);
 }

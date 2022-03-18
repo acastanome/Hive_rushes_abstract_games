@@ -6,12 +6,13 @@
 /*   By: spuustin <spuustin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 19:29:20 by spuustin          #+#    #+#             */
-/*   Updated: 2022/03/18 22:16:52 by spuustin         ###   ########.fr       */
+/*   Updated: 2022/03/19 00:36:00 by spuustin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "santorini.h"
 #include <stdio.h>
+#include <stdlib.h>
 
 static int has_room(int *array, int pos, int pid)
 {
@@ -20,7 +21,7 @@ static int has_room(int *array, int pos, int pid)
 	{
 		if (is_adjacent(pos, i) == 1)
 			if (is_position_buildable(array[i]) == 1)
-				if (is_level_ok((array[i] - pid), array[i]) == 1)
+				if (is_level_ok((array[pos] - pid), array[i]) == 1)
 					return (1);
 		i++;
 	}
@@ -42,28 +43,28 @@ int get_pid(int value)
 int can_plr_move(int *array, int player)
 {
 	int i = 0;
-	int lowerb = 10;
-	int	upperb = 25;
-	int	pos_1 = 0;
-	int	pos_2 = 0;
+	int lowerb = 9;
+	int	upperb = 23;
+	int	pos_1 = -10;
+	int	pos_2 = -10;
 	int ret;
 	int pid;
 	if (player == 2)
 	{
-		upperb *= 2;
-		lowerb *= 3;
+		upperb = 43;
+		lowerb = 29;
 	}
 	while (i < 25)
 	{
-		while (pos_1 == 0)
+		while (pos_1 == -10)
 		{
-			if (array[i] >= lowerb && array[i] < upperb)
+			if (array[i] >= lowerb && array[i] <= upperb)
 				pos_1 = i;
 			i++;
 		}
-		while (pos_2 == 0)
+		while (pos_2 == -10)
 		{
-			if (array[i] >= lowerb && array[i] < upperb)
+			if (array[i] >= lowerb && array[i] <= upperb)
 				pos_2 = i;
 			i++;
 		}
@@ -76,5 +77,12 @@ int can_plr_move(int *array, int player)
 		pid = get_pid(array[pos_2]);
 		ret = has_room(array, pos_2, pid);
 	}
-	return (ret);
+	if (ret == 0)
+	{
+		ft_putstr("player ");
+		ft_putnbr(player);
+		ft_putstr(", you cant move anywhere, you lost the game.\n");
+		exit(-1);
+	}
+	return (1);
 }

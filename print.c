@@ -6,7 +6,7 @@
 /*   By: spuustin <spuustin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 11:20:43 by spuustin          #+#    #+#             */
-/*   Updated: 2022/03/18 22:04:19 by spuustin         ###   ########.fr       */
+/*   Updated: 2022/03/19 01:00:39 by spuustin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,11 @@ void	print_board(int *array)
 			else
 				ft_putnbr(array[i]);
 			i++;
-			ft_putchar(' ');
+			ft_putchar('\t');
 			x++;
 		}
 		y++;
 		ft_putchar('\n');
 	}
+	ft_putchar('\n');
 }
