@@ -6,7 +6,7 @@
 /*   By: spuustin <spuustin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 10:39:27 by spuustin          #+#    #+#             */
-/*   Updated: 2022/03/18 12:31:28 by spuustin         ###   ########.fr       */
+/*   Updated: 2022/03/18 16:56:53 by spuustin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	is_char(char *str, int i, char c)
 		return (0);
 	return (2);
 }
-int	player_char_to_id(char c)
+int static	player_char_to_id(char c)
 {
 	if (c == 'A')
 		return (10);
@@ -29,7 +29,7 @@ int	player_char_to_id(char c)
 		return (30);
 	return (40);
 }
-int	turn_parser(char *str)
+int	turn_parser(char *str, int *array)
 {
 	int		player;
 	int		move_from;
@@ -50,14 +50,14 @@ int	turn_parser(char *str)
 		return (error("delimiter"));
 	i++;
 	move_from = ft_atoi(str + i);
-	if (move_from < 0 || move_from > 25)
+	if (move_from < 1 || move_from > 25)
 		return (0); //error(from)
 	i += ft_num_length(move_from);
 	if (is_char(str, i, ' ') == 0)
 		return (error("delimiter"));
 	i++;
 	move_to = ft_atoi(str + i);
-	if (move_to < 0 || move_to > 25)
+	if (move_to < 1 || move_to > 25)
 		return (error("move"));
 	if (move_from == move_to)
 		return(0); //you cant move to where you are at!
@@ -66,7 +66,7 @@ int	turn_parser(char *str)
 		return (error("delimiter"));
 	i++;
 	build = ft_atoi(str + i);
-	if (build < 0 || build > 25)
+	if (build < 1 || build > 25)
 		return (error("build"));
 	if (build == move_to)
 		return (0); //you cant build on where you currently are!
@@ -75,7 +75,7 @@ int	turn_parser(char *str)
 	if (i != ft_strlen(str))
 		return (error("strlen"));
 	ft_putstr("player: ");
-	ft_putchar(player);
+	ft_putnbr(player);
 	ft_putstr(", from: ");
 	ft_putnbr(move_from);
 	ft_putstr(", to: ");
@@ -83,6 +83,6 @@ int	turn_parser(char *str)
 	ft_putstr(", build on: ");
 	ft_putnbr(build);
 	ft_putchar('\n');
-	//function(player, move_from -1, move_to -1, build -1);
+	//function(array, player, move_from -1, move_to -1, build -1);
 	return (0);
 }

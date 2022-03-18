@@ -6,7 +6,7 @@
 /*   By: spuustin <spuustin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 14:25:38 by spuustin          #+#    #+#             */
-/*   Updated: 2022/03/18 11:53:18 by spuustin         ###   ########.fr       */
+/*   Updated: 2022/03/18 19:31:56 by spuustin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ int		main(void)
 	int ret = 2;
 	int e = 1;
 	int array[25];
+	int turn = 1;
+
 	set_empty_stage(array);
 	ft_putstr("N = start a new game\n");
 	ft_putstr("E = clear the state.\n");
@@ -29,16 +31,21 @@ int		main(void)
 	while (ret != 1)
 	{
 		ret = read(STDIN_FILENO, buffer, 1000);
-		if (buffer[0] == 'T')
-			e = turn_parser(buffer);
+		if (buffer[0] == 'T' && turn > 2)
+			e = turn_parser(buffer, array);
 		else if (buffer[0] == 'E' && ret == 2)
 			set_empty_stage(array);
 		else if (buffer[0] == 'P' && ret == 2)
 			print_state(array);
 		else if (buffer[0] == 'S')
 			set_stage(array, buffer);
-		else if (buffer[0] == 'N' && ret == 2)
-			ft_putstr("new game:\n");
+		else if (buffer[0] == 'T')
+		{
+			if (new_game(array, buffer, turn) == 0)
+				turn = 1;
+			else
+				turn ++;
+		}
 		else if (ret != 1)
 			ft_putstr("invalid input, try again.\n");
 		bzero(buffer, 100);

@@ -6,7 +6,7 @@
 /*   By: spuustin <spuustin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 19:58:46 by spuustin          #+#    #+#             */
-/*   Updated: 2022/03/18 12:30:39 by spuustin         ###   ########.fr       */
+/*   Updated: 2022/03/18 15:15:19 by spuustin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,40 +62,39 @@ int		delim_count(char *array, char delim)
 	return (count);
 }
 
-static int	is_populated(int *array, int index)
+static int	is_square_populated(int *array, int index)
 {
-	if (array[index - 1] > 9)
+	if (array[index] > 9)
 	{
 		ft_putstr("square already populated.\n");
 		return (1);
 	}
 	return (0);
 }
-static int	builder_set(int *plrs, char p)
+
+static int		is_builder_placed(char plr, int *placed)
 {
-	if (p == 'A' && plrs[0] == 1)
+	int	i = plr - 'A';
+	if (placed[i] == 1)
 	{
-		ft_putstr("builder already placed elsewhere.\n");
-		return (1);
-	}
-	if (p == 'B' && plrs[1] == 1)
-	{
-		ft_putstr("builder already placed elsewhere.\n");
-		return (1);
-	}
-	if (p == 'C' && plrs[2] == 1)
-	{
-		ft_putstr("builder already placed elsewhere.\n");
-		return (1);
-	}
-	if (p == 'D' && plrs[3] == 1)
-	{
-		ft_putstr("builder already placed elsewhere.\n");
+		ft_putstr("player already placed.\n");
 		return (1);
 	}
 	return (0);
-		
 }
+
+static void	populate_builder(int *array, int i, int *builders, char plr)
+{
+	int p = plr - 'A';
+	
+	builders[p] = 1;
+	while (p >= 0)
+	{
+		array[i] += 10;
+		p--;
+	}
+}
+
 int		set_stage(int *array, char *buffer)
 {
 	int i = 1;
@@ -103,7 +102,7 @@ int		set_stage(int *array, char *buffer)
 	int	square;
 	int builders[4] = {0,0,0,0};
 	
-	while (buffer[i] != '\0' && i + 1 != ft_strlen(buffer))
+	while (buffer[i] != '\n')
 	{
 		if (is_char(buffer, i, ' ') == 0)
 		{
@@ -126,56 +125,20 @@ int		set_stage(int *array, char *buffer)
 			return (0); //error
 		}
 		i++;
-		if (buffer[i] >= '1' && buffer[i] <= '4')
-			array[square] = buffer[i];
-		else if (buffer[i] == 'A')
+		if (buffer[i] >= 'A' && buffer[i] <= 'D')
 		{
-			if (builder_set(builders, 'A') == 1)
-				return (0);
-			if (is_populated(array, square) == 1)
-				return(0);
-			else
+			if (is_builder_placed(buffer[i], builders) == 1 || \
+			is_square_populated(array, square - 1) == 1)
 			{
-				array[square - 1] += 10;
-				builders[0] = 1;
+				set_empty_stage(array);
+				return (0);
 			}
-		} 
-		else if (buffer[i] == 'B')
+			populate_builder(array, square - 1, builders, buffer[i]);
+		}
+		else if (buffer[i] >= '1' && buffer[i] <= '4')
 		{
-			if (builder_set(builders, 'B') == 1)
-				return (0);
-			if (is_populated(array, square) == 1)
-				return(0);
-			else
-			{
-				array[square - 1] += 20;
-				builders[1] = 1;
-			}
-		} 
-				else if (buffer[i] == 'C')
-		{
-			if (builder_set(builders, 'C') == 1)
-				return (0);
-			if (is_populated(array, square) == 1)
-				return(0);
-			else
-			{
-				array[square - 1] += 30;
-				builders[2] = 1;
-			}
-		} 
-				else if (buffer[i] == 'D')
-		{
-			if (builder_set(builders, 'D') == 1)
-				return (0);
-			if (is_populated(array, square) == 1)
-				return(0);
-			else
-			{
-				array[square - 1] += 40;
-				builders[3] = 1;
-			}
-		} 
+			array[square - 1] += ft_atoi(buffer + i);
+		}
 		else
 		{
 			set_empty_stage(array);
