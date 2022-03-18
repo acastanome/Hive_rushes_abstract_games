@@ -6,18 +6,11 @@
 /*   By: spuustin <spuustin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 19:58:46 by spuustin          #+#    #+#             */
-/*   Updated: 2022/03/18 15:15:19 by spuustin         ###   ########.fr       */
+/*   Updated: 2022/03/18 21:09:19 by spuustin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "santorini.h"
-
-static int	check_delim(char *str, int i)
-{
-	if (str[i] && str[i] != ' ')
-		return (error("delimiter"));
-	return (2);
-}
 
 void	populate(int *array)
 {
@@ -98,7 +91,6 @@ static void	populate_builder(int *array, int i, int *builders, char plr)
 int		set_stage(int *array, char *buffer)
 {
 	int i = 1;
-	int	count;
 	int	square;
 	int builders[4] = {0,0,0,0};
 	

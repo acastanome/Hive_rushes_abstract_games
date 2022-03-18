@@ -6,7 +6,7 @@
 /*   By: spuustin <spuustin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 15:22:23 by spuustin          #+#    #+#             */
-/*   Updated: 2022/03/18 12:56:18 by acastano         ###   ########.fr       */
+/*   Updated: 2022/03/18 21:09:27 by spuustin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,9 @@ int		set_stage(int *array, char *buffer);
 void	set_empty_stage(int *array);
 
 //turn
-int		turn_parser(char *str);
+int		turn_parser(char *str, int *array);
 int		is_char(char *str, int i, char c);
+
+//start
+int	new_game(int *array, char *str, int turn);
 #endif

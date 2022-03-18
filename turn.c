@@ -6,7 +6,7 @@
 /*   By: spuustin <spuustin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 10:39:27 by spuustin          #+#    #+#             */
-/*   Updated: 2022/03/18 16:56:53 by spuustin         ###   ########.fr       */
+/*   Updated: 2022/03/18 21:09:51 by spuustin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ int	turn_parser(char *str, int *array)
 	int		move_to;
 	int		build;
 	int		i = 1;
-	char 	s = ' ';
 
 	if (is_char(str, i, ' ') == 0)
 		return (error("delimiter"));
@@ -72,7 +71,7 @@ int	turn_parser(char *str, int *array)
 		return (0); //you cant build on where you currently are!
 	i += ft_num_length(build);
 	i++;
-	if (i != ft_strlen(str))
+	if (i != (int) ft_strlen(str))
 		return (error("strlen"));
 	ft_putstr("player: ");
 	ft_putnbr(player);
@@ -83,6 +82,6 @@ int	turn_parser(char *str, int *array)
 	ft_putstr(", build on: ");
 	ft_putnbr(build);
 	ft_putchar('\n');
-	//function(array, player, move_from -1, move_to -1, build -1);
+	ft_play(array, player, move_from -1, move_to -1, build -1);
 	return (0);
 }

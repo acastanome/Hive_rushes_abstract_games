@@ -1,14 +1,14 @@
-#******************************************************************************#
+# **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: acastano <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: spuustin <spuustin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/18 14:53:21 by acastano          #+#    #+#              #
-#    Updated: 2022/03/18 15:08:53 by acastano         ###   ########.fr        #
+#    Updated: 2022/03/18 21:06:01 by spuustin         ###   ########.fr        #
 #                                                                              #
-#******************************************************************************#
+# **************************************************************************** #
 
 CC = clang
 
@@ -16,7 +16,7 @@ CFLAGS = -Wall -Wextra -Werror
 
 NAME = santorini
 
-SRCS = main.c error.c state.c turn.c board.c check_functions.c print.c
+SRCS = main.c error.c state.c turn.c board.c check_functions.c print.c start.c
 
 HEADERS = ./libft/includes/
 
