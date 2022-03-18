@@ -6,7 +6,7 @@
 /*   By: spuustin <spuustin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 19:58:46 by spuustin          #+#    #+#             */
-/*   Updated: 2022/03/19 00:50:52 by spuustin         ###   ########.fr       */
+/*   Updated: 2022/03/19 01:14:45 by spuustin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,14 +171,14 @@ int		set_stage(int *array, char *buffer)
 		{
 			set_empty_stage(array);
 			ft_putstr("square number needs to be 1-25\n");
-			return (0); //error
+			return (0); 
 		}
 		i += ft_num_length(square);
 		if (buffer[i] != '.')
 		{
 			set_empty_stage(array);
 			ft_putstr("no point as delimiter\n");
-			return (0); //error
+			return (0); 
 		}
 		i++;
 		if (buffer[i] >= 'A' && buffer[i] <= 'D')
@@ -199,7 +199,7 @@ int		set_stage(int *array, char *buffer)
 		{
 			set_empty_stage(array);
 			ft_putstr("insert a block-height (1-4) or a player (A-D).\n");
-			return (0); //error
+			return (0); 
 		}
 		i++;
 	}

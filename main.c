@@ -6,7 +6,7 @@
 /*   By: spuustin <spuustin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 14:25:38 by spuustin          #+#    #+#             */
-/*   Updated: 2022/03/19 00:47:21 by spuustin         ###   ########.fr       */
+/*   Updated: 2022/03/19 01:15:43 by spuustin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,23 +22,23 @@ int		main(void)
 	int turn = 1;
 
 	set_empty_stage(array);
-	ft_putstr("N = start a new game\n");
-	ft_putstr("E = clear the state.\n");
-	ft_putstr("P = print the current state.\n");
+	ft_putstr("welcome to the game of Santorini!\n\n");
+	ft_putstr("T = play turn (T C 4 8 9)\n");
 	ft_putstr("S... = set stage (S 1.D 14.2 22.1 22.A ...)\n");
-	ft_putstr("s = print the current state in string.\n");
-	ft_putstr("T = play turn (T C 4 8 9\n");
+	ft_putstr("P = print the current state.\n");
+	ft_putstr("PS = print the current state in string.\n");
+	ft_putstr("C = clear the state.\n");
 	ft_putstr("ENTER to exit.\n");
 	while (ret != 1)
 	{
 		ret = read(STDIN_FILENO, buffer, 1000);
 		if (buffer[0] == 'T' && turn > 2)
 			e = turn_parser(buffer, array);
-		else if (buffer[0] == 'E' && ret == 2)
+		else if (buffer[0] == 'C' && ret == 2)
 			set_empty_stage(array);
 		else if (buffer[0] == 'P' && ret == 2)
 			print_board(array);
-		else if (buffer[0] == 's')
+		else if (buffer[0] == 'P' && buffer[1] == 'S' && ret == 3)
 			print_state(array);
 		else if (buffer[0] == 'S')
 		{

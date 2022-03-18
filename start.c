@@ -6,7 +6,7 @@
 /*   By: spuustin <spuustin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 16:08:18 by spuustin          #+#    #+#             */
-/*   Updated: 2022/03/18 16:40:12 by spuustin         ###   ########.fr       */
+/*   Updated: 2022/03/19 01:13:35 by spuustin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	new_game(int *array, char *str, int turn)
 	while (str[i] && str[i] != '\n')
 	{
 		if (str[i] != ' ')
-			return (err(array)); // T A 5 B 11
+			return (err(array));
 		i++;
 		if (str[i] != ('A' + j + k))
 			return (err(array));
