@@ -6,7 +6,7 @@
 /*   By: spuustin <spuustin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 19:58:46 by spuustin          #+#    #+#             */
-/*   Updated: 2022/03/17 22:55:25 by spuustin         ###   ########.fr       */
+/*   Updated: 2022/03/18 12:30:39 by spuustin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,42 +19,12 @@ static int	check_delim(char *str, int i)
 	return (2);
 }
 
-void	print_state(int *array)
+void	populate(int *array)
 {
-	ft_putstr("tulostan stagen\n");
-	int i = 0;
-	int y = 0;
-	int x;
-	
-	while (y < 5)
-	{
-		x = 0;
-		while (x < 5)
-		{
-			ft_putnbr(array[i]);
-			i++;
-			ft_putchar(' ');
-			x++;
-		}
-		y++;
-		ft_putchar('\n');
-	}
-}
-
-
-void	set_empty_stage(int *array)
-{
-	int i = 0;
 	char pos[2];
+	int i = 0;
 	char plr = 'A';
-	int	c = 10;
-	ft_putstr("asetan tyhjan stagen.\n");
-	while (i < 25)
-	{
-		array[i] = 0;
-		i++;
-	}
-	i = 0;
+	int c = 10;
 	while (i < 4)
 	{
 		ft_putstr("give a position of a builder ");
@@ -64,6 +34,17 @@ void	set_empty_stage(int *array)
 		read(STDIN_FILENO, pos, 2);
 		array[ft_atoi(pos) - 1] = c;
 		c += 10;
+		i++;
+	}
+}
+
+void	set_empty_stage(int *array)
+{
+	int i = 0;
+	ft_putstr("setting up an empty state.\n");
+	while (i < 25)
+	{
+		array[i] = 0;
 		i++;
 	}
 }
@@ -81,58 +62,124 @@ int		delim_count(char *array, char delim)
 	return (count);
 }
 
+static int	is_populated(int *array, int index)
+{
+	if (array[index - 1] > 9)
+	{
+		ft_putstr("square already populated.\n");
+		return (1);
+	}
+	return (0);
+}
+static int	builder_set(int *plrs, char p)
+{
+	if (p == 'A' && plrs[0] == 1)
+	{
+		ft_putstr("builder already placed elsewhere.\n");
+		return (1);
+	}
+	if (p == 'B' && plrs[1] == 1)
+	{
+		ft_putstr("builder already placed elsewhere.\n");
+		return (1);
+	}
+	if (p == 'C' && plrs[2] == 1)
+	{
+		ft_putstr("builder already placed elsewhere.\n");
+		return (1);
+	}
+	if (p == 'D' && plrs[3] == 1)
+	{
+		ft_putstr("builder already placed elsewhere.\n");
+		return (1);
+	}
+	return (0);
+		
+}
 int		set_stage(int *array, char *buffer)
 {
-	ft_putstr("asetan stagen\n");
 	int i = 1;
 	int	count;
 	int	square;
-	int player_placed[4] = {0,0,0,0};
+	int builders[4] = {0,0,0,0};
 	
 	while (buffer[i] != '\0' && i + 1 != ft_strlen(buffer))
 	{
-		if (buffer[i] && buffer[i] != ' ')
+		if (is_char(buffer, i, ' ') == 0)
 		{
-			ft_putstr("delim is:");
-			ft_putchar(buffer[i]);
+			set_empty_stage(array);
 			return (error("delimiter"));
 		}
 		i++;
 		square = ft_atoi(buffer + i);
 		if (square < 1 || square > 25)
 		{
-			ft_putstr("bad index\n");
+			set_empty_stage(array);
+			ft_putstr("square number needs to be 1-25\n");
 			return (0); //error
 		}
 		i += ft_num_length(square);
 		if (buffer[i] != '.')
 		{
-			ft_putstr("no point\n");
+			set_empty_stage(array);
+			ft_putstr("no point as delimiter\n");
 			return (0); //error
 		}
 		i++;
 		if (buffer[i] >= '1' && buffer[i] <= '4')
 			array[square] = buffer[i];
-		else if (buffer[i] == 'A' && player_placed[0] == 0)
+		else if (buffer[i] == 'A')
 		{
-			array[square - 1] += 10;
-			player_placed[0] = 1;
-		} else if (buffer[i] == 'B' && player_placed[1] == 0)
+			if (builder_set(builders, 'A') == 1)
+				return (0);
+			if (is_populated(array, square) == 1)
+				return(0);
+			else
+			{
+				array[square - 1] += 10;
+				builders[0] = 1;
+			}
+		} 
+		else if (buffer[i] == 'B')
 		{
-			array[square - 1] += 20;
-			player_placed[1] = 1;
-		} else if (buffer[i] == 'C' && player_placed[2] == 0)
+			if (builder_set(builders, 'B') == 1)
+				return (0);
+			if (is_populated(array, square) == 1)
+				return(0);
+			else
+			{
+				array[square - 1] += 20;
+				builders[1] = 1;
+			}
+		} 
+				else if (buffer[i] == 'C')
 		{
-			array[square - 1] += 30;
-			player_placed[2] = 1;
-		} else if (buffer[i] == 'D' && player_placed[3] == 0)
+			if (builder_set(builders, 'C') == 1)
+				return (0);
+			if (is_populated(array, square) == 1)
+				return(0);
+			else
+			{
+				array[square - 1] += 30;
+				builders[2] = 1;
+			}
+		} 
+				else if (buffer[i] == 'D')
 		{
-			array[square - 1] += 40;
-			player_placed[3] = 1;
-		}
+			if (builder_set(builders, 'D') == 1)
+				return (0);
+			if (is_populated(array, square) == 1)
+				return(0);
+			else
+			{
+				array[square - 1] += 40;
+				builders[3] = 1;
+			}
+		} 
 		else
 		{
-			ft_putstr("bad fill\n");
+			set_empty_stage(array);
+			ft_putstr("insert a block-height (1-4) or a player (A-D).\n");
 			return (0); //error
 		}
 		i++;
@@ -140,9 +187,10 @@ int		set_stage(int *array, char *buffer)
 	i = 0;
 	while (i < 4)
 	{
-		if (player_placed[i] == 0)
+		if (builders[i] == 0)
 		{
-			ft_putstr("player not placed\n");
+			set_empty_stage(array);
+			ft_putstr("all players need to be placed.\n");
 			return(0);
 		}
 		i++;

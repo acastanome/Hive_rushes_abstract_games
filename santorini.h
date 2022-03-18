@@ -6,12 +6,15 @@
 /*   By: spuustin <spuustin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 15:22:23 by spuustin          #+#    #+#             */
-/*   Updated: 2022/03/17 23:12:29 by spuustin         ###   ########.fr       */
+/*   Updated: 2022/03/18 11:42:43 by spuustin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PRINTF_H
 # define PRINTF_H
+
+#include <unistd.h>
+#include "libft/libft.h"
 
 //error.c
 int error(char *str);
@@ -29,8 +32,14 @@ int	is_position_buildable(int position);
 int	ft_move(int *board, int player_id, int pos1, int pos2);
 int	ft_build(int *board, int player_position, int position);
 
-//simo
+//print
 void	print_state(int *array);
+
+//state
 int		set_stage(int *array, char *buffer);
 void	set_empty_stage(int *array);
+
+//turn
+int		turn_parser(char *str);
+int		is_char(char *str, int i, char c);
 #endif
