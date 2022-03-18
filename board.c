@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   board.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acastano <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: spuustin <spuustin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 14:34:30 by acastano          #+#    #+#             */
-/*   Updated: 2022/03/18 19:58:33 by acastano         ###   ########.fr       */
+/*   Updated: 2022/03/18 21:15:54 by spuustin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	ft_move(int *board, int player_id, int pos1, int pos2)
 		error("Occupied");
 	else if (is_adjacent(pos1, pos2) == 0)
 		error("Not adjacent");
-	else if (is_level_ok(pos1, pos2) == 0)
+	else if (is_level_ok(board[pos1] - player_id, board[pos2]) == 0)
 		error("Level height");
 	else
 	{
