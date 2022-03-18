@@ -6,7 +6,7 @@
 /*   By: spuustin <spuustin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 14:25:38 by spuustin          #+#    #+#             */
-/*   Updated: 2022/03/18 19:31:56 by spuustin         ###   ########.fr       */
+/*   Updated: 2022/03/18 21:55:33 by spuustin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,10 @@ int		main(void)
 		else if (buffer[0] == 'P' && ret == 2)
 			print_state(array);
 		else if (buffer[0] == 'S')
+		{
 			set_stage(array, buffer);
+			turn = 100;
+		}
 		else if (buffer[0] == 'T')
 		{
 			if (new_game(array, buffer, turn) == 0)
