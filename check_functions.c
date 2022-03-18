@@ -6,7 +6,7 @@
 /*   By: acastano <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 21:31:02 by acastano          #+#    #+#             */
-/*   Updated: 2022/03/17 23:06:59 by acastano         ###   ########.fr       */
+/*   Updated: 2022/03/18 17:38:31 by acastano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,17 +42,50 @@ int	is_player_id(int square_status, int player_id)
 /*
  * is_adjacent() takes an int representing the index of position 1, and an int
  * representing the index of the position 2.
- * It checks if the positions are adjacent.
+ * It checks if the positions are adjacent: Top, bottom, left, right and diagonals.
  * Return values: 1 if they are, 0 if not.
  */
 int	is_adjacent(int pos1, int pos2)
 {
 	int	dif;
+	int	ret;
 
-	dif = pos1 - pos2;
-	if ((dif == -6) || (dif == 6) || (dif == -5) || (dif == 5) || (dif == -1) || (dif == 1))
-		return (1);
-	return (0);
+	ret = 0;
+	dif = pos2 - pos1;
+//	if ((dif == -6) || (dif == 6) || (dif == -5) || (dif == 5) || (dif == -1) || (dif == 1))
+//		return (1);
+	printf("in adjacent dif is %d and pos1+1 mod5 is %d\n", dif, ((pos1+1) % 5));
+	if (pos1 < pos2)
+	{
+		if ((((pos1 + 1) % 5) == 0) && ((dif == 4) || (dif == 5)))
+//		{
+//			printf("we here?");
+			return (1);
+//		}
+		else if (((pos1 % 5) == 0) && ((dif == 1) || (dif == 5) || (dif == 6)))
+			return (1);
+		else if ((dif == 1) || (dif == 4) || (dif == 5) || (dif == 6))
+			return (1);
+	}
+	if (pos1 > pos2)
+	{
+		if ((((pos1 + 1) % 5) == 0) && ((dif == -1) || (dif == -5) || (dif == -6)))
+		{
+			printf("we here?1");
+			return (1);
+		}
+		else if (((pos1 % 5) == 0) && ((dif == -4) || (dif == -5)))
+		{
+			printf("we here?2");
+			return (1);
+		}
+		else if (((pos1 % 5) != 0) && ((dif == -1) || (dif == -4) || (dif == -5) || (dif == -6)))
+		{
+			printf("we here?3");
+			return (1);
+		}
+	}
+	return (ret);
 }
 
 /*
