@@ -6,7 +6,7 @@
 /*   By: acastano <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 14:34:30 by acastano          #+#    #+#             */
-/*   Updated: 2022/03/18 13:08:44 by acastano         ###   ########.fr       */
+/*   Updated: 2022/03/18 13:14:05 by acastano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,13 @@ int	ft_build(int *board, int player_position, int position)
  */
 int	ft_play(int *board, int player_id, int i_move_from, int i_move_to, int i_build)
 {
-	int	*temp_board;
+	int	temp_board[25];
 
+	while (i < 25)
+	{
+		temp_board[i] = board[i];
+		i++;
+	}
 	if ((ft_move(temp_board, player_id, i_move_from, i_move_to) == 1)
 		&& (ft_build(temp_board, i_move_to, i_build) == 1))
 		board = temp_board;
