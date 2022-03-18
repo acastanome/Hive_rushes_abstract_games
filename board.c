@@ -6,12 +6,13 @@
 /*   By: acastano <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 14:34:30 by acastano          #+#    #+#             */
-/*   Updated: 2022/03/18 13:14:05 by acastano         ###   ########.fr       */
+/*   Updated: 2022/03/18 13:31:26 by acastano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft/libft.h"
 #include "santorini.h"
+#include <stdio.h>
 
 /*
  * ft_move() takes an int array representing the board (and it's content), an
@@ -71,7 +72,9 @@ int	ft_build(int *board, int player_position, int position)
 int	ft_play(int *board, int player_id, int i_move_from, int i_move_to, int i_build)
 {
 	int	temp_board[25];
+	int	i;
 
+	i = 0;
 	while (i < 25)
 	{
 		temp_board[i] = board[i];
@@ -79,10 +82,55 @@ int	ft_play(int *board, int player_id, int i_move_from, int i_move_to, int i_bui
 	}
 	if ((ft_move(temp_board, player_id, i_move_from, i_move_to) == 1)
 		&& (ft_build(temp_board, i_move_to, i_build) == 1))
-		board = temp_board;
-	else
-		return (0);
+	{
+		i = 0;
+		while (i < 25)
+		{
+			board[i] = temp_board[i];
+			i++;
+		}
+		return (1);
+	}
+	return (0);
 	//print_map(map);
 	//ask_next_move;
-	return (1);
 }
+
+/*
+int	main(void)
+{
+	int	board[25];
+	int	i;
+
+	i = 0;
+	while (i < 25)
+	{
+		board[i] = 0;
+		i++;
+	}
+	board[3] = 11;
+	board[4] = 2;
+	board[7] = 23;
+	board[8] = 33;
+	board[9] = 4;
+	i = 0;
+	while (i < 25)
+	{
+		printf("%d ",board[i]);
+		if ((((i + 1) % 5) == 0) && 1 != 0)
+			printf("\n");
+		i++;
+	}
+	ft_play(board, 10, 3, 4, 5);
+	printf("\n");
+	i = 0;
+	while (i < 25)
+	{
+		printf("%d ",board[i]);
+		if ((((i + 1) % 5) == 0) && 1 != 0)
+			printf("\n");
+		i++;
+	}
+	return (0);
+}
+*/
