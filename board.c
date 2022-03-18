@@ -6,7 +6,7 @@
 /*   By: acastano <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 14:34:30 by acastano          #+#    #+#             */
-/*   Updated: 2022/03/18 17:39:07 by acastano         ###   ########.fr       */
+/*   Updated: 2022/03/18 19:58:33 by acastano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,45 +22,20 @@
  */
 int	ft_move(int *board, int player_id, int pos1, int pos2)
 {
-	int	i;
-
-	printf("in ft_move()\n");
 	if (is_player_id(board[pos1], player_id) == 0)
-	{
 		error("Player not there");
-		printf("\tft_move() after player not there\n");
-	}
 	else if (is_position_buildable(board[pos2]) == 0)
-	{
 		error("Occupied");
-		printf("\tft_move() after occ\n");
-	}
 	else if (is_adjacent(pos1, pos2) == 0)
-	{	
 		error("Not adjacent");
-		printf("\tft_move() not adj: pos1 is %d, pos2 is %d\n", pos1, pos2);
-	}
 	else if (is_level_ok(pos1, pos2) == 0)
-	{
 		error("Level height");
-		printf("\tft_move() level heigh\n");
-	}
 	else
 	{
-		printf("\tft_move() in loop\n");
 		board[pos1] = (board[pos1] - player_id);
 		board[pos2] = (board[pos2] + player_id);
-		i = 0;
-		while (i < 25)
-		{
-			printf("%d ",board[i]);
-			if ((((i + 1) % 5) == 0) && 1 != 0)
-				printf("\n");
-			i++;
-		}
 		return (1);
 	}
-	printf("\tft_move() failed\n");
 	return (0);
 }
 
@@ -74,9 +49,6 @@ int	ft_move(int *board, int player_id, int pos1, int pos2)
  */
 int	ft_build(int *board, int player_position, int position)
 {
-	int	i;
-
-	printf("in ft_build()\n");
 	if (is_adjacent(player_position, position) == 0)
 		error("Not adjacent");
 	else if (is_position_buildable(board[position]) == 0)
@@ -84,17 +56,8 @@ int	ft_build(int *board, int player_position, int position)
 	else
 	{
 		board[position] = board[position] + 1;
-		i = 0;
-		while (i < 25)
-		{
-			printf("%d ",board[i]);
-			if ((((i + 1) % 5) == 0) && 1 != 0)
-				printf("\n");
-			i++;
-		}
 		return (1);
 	}
-	printf("\tft_build() failed\n");
 	return (0);
 }
 
@@ -117,25 +80,21 @@ int	ft_play(int *board, int player_id, int i_move_from, int i_move_to, int i_bui
 		temp_board[i] = board[i];
 		i++;
 	}
-	printf("in ft_play()\n");
 	if ((ft_move(temp_board, player_id, i_move_from, i_move_to) == 1)
 		&& (ft_build(temp_board, i_move_to, i_build) == 1))
 	{
-		printf("\tft_play() move and build are true\n");
 		i = 0;
 		while (i < 25)
 		{
 			board[i] = temp_board[i];
 			i++;
-		}
+			}
 		return (1);
 	}
-	printf("ft_play() failed\n");
 	return (0);
-	//print_map(map);
-	//ask_next_move;
 }
 
+/*
 int	main(void)
 {
 	int	board[25];
@@ -147,11 +106,9 @@ int	main(void)
 		board[i] = 0;
 		i++;
 	}
-	board[3] = 1;
-	board[5] = 31;
-	board[7] = 1;
-	board[8] = 1;
-	board[9] = 1;
+	board[4] = 10;
+	board[11] = 20;
+	board[24] = 30;
 	i = 0;
 	while (i < 25)
 	{
@@ -160,8 +117,7 @@ int	main(void)
 			printf("\n");
 		i++;
 	}
-//	ft_play(board, 30, 4, 5, 6);
-	ft_play(board, 30, 5, 1, 2);
+	ft_play(board, 30, 24, 18, 13);
 	printf("\n");
 	i = 0;
 	while (i < 25)
@@ -173,3 +129,4 @@ int	main(void)
 	}
 	return (0);
 }
+*/

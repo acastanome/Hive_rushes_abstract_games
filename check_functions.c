@@ -6,13 +6,12 @@
 /*   By: acastano <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 21:31:02 by acastano          #+#    #+#             */
-/*   Updated: 2022/03/18 17:38:31 by acastano         ###   ########.fr       */
+/*   Updated: 2022/03/18 19:56:25 by acastano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft/libft.h"
 #include "santorini.h"
-#include <stdio.h>//test
 
 /*
  * is_player() checks if there is a player in that square
@@ -32,10 +31,7 @@ int	is_player(int square_status)
 int	is_player_id(int square_status, int player_id)
 {
 	if ((square_status / 10) != (player_id / 10))
-	{
-		printf("wrong player id\n");
 		return (0);
-	}
 	return (1);
 }
 
@@ -52,38 +48,23 @@ int	is_adjacent(int pos1, int pos2)
 
 	ret = 0;
 	dif = pos2 - pos1;
-//	if ((dif == -6) || (dif == 6) || (dif == -5) || (dif == 5) || (dif == -1) || (dif == 1))
-//		return (1);
-	printf("in adjacent dif is %d and pos1+1 mod5 is %d\n", dif, ((pos1+1) % 5));
 	if (pos1 < pos2)
 	{
 		if ((((pos1 + 1) % 5) == 0) && ((dif == 4) || (dif == 5)))
-//		{
-//			printf("we here?");
 			return (1);
-//		}
 		else if (((pos1 % 5) == 0) && ((dif == 1) || (dif == 5) || (dif == 6)))
 			return (1);
-		else if ((dif == 1) || (dif == 4) || (dif == 5) || (dif == 6))
+		else if (((pos1 % 5) != 0) && ((dif == 1) || (dif == 4) || (dif == 5) || (dif == 6)))
 			return (1);
 	}
 	if (pos1 > pos2)
 	{
 		if ((((pos1 + 1) % 5) == 0) && ((dif == -1) || (dif == -5) || (dif == -6)))
-		{
-			printf("we here?1");
 			return (1);
-		}
 		else if (((pos1 % 5) == 0) && ((dif == -4) || (dif == -5)))
-		{
-			printf("we here?2");
 			return (1);
-		}
 		else if (((pos1 % 5) != 0) && ((dif == -1) || (dif == -4) || (dif == -5) || (dif == -6)))
-		{
-			printf("we here?3");
 			return (1);
-		}
 	}
 	return (ret);
 }
@@ -130,15 +111,7 @@ int	is_dome(int square_status)
  */
 int	is_position_buildable(int position)
 {
-	if (is_player(position) == 1)
-	{
-		printf("\tPOS\n");
+	if ((is_player(position) == 1) || (is_dome(position) == 1))
 		return (0);
-	}
-	if (is_dome(position) == 1)
-	{
-		printf("\tDOME\n");
-		return (0);
-	}
 	return (1);
 }
