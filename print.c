@@ -6,13 +6,13 @@
 /*   By: spuustin <spuustin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 11:20:43 by spuustin          #+#    #+#             */
-/*   Updated: 2022/03/18 11:34:00 by spuustin         ###   ########.fr       */
+/*   Updated: 2022/03/18 22:04:19 by spuustin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "santorini.h"
 
-void	print_state(int *array)
+void	print_board(int *array)
 {
 	ft_putstr("printing current state.\n");
 	int i = 0;

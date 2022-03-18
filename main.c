@@ -6,7 +6,7 @@
 /*   By: spuustin <spuustin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 14:25:38 by spuustin          #+#    #+#             */
-/*   Updated: 2022/03/18 21:55:33 by spuustin         ###   ########.fr       */
+/*   Updated: 2022/03/18 22:43:34 by spuustin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int		main(void)
 	ft_putstr("E = clear the state.\n");
 	ft_putstr("P = print the current state.\n");
 	ft_putstr("S... = set stage (S 1.D 14.2 22.1 22.A ...)\n");
+	ft_putstr("s = print the current state in string.\n");
 	ft_putstr("T = play turn (T C 4 8 9\n");
 	ft_putstr("ENTER to exit.\n");
 	while (ret != 1)
@@ -36,6 +37,8 @@ int		main(void)
 		else if (buffer[0] == 'E' && ret == 2)
 			set_empty_stage(array);
 		else if (buffer[0] == 'P' && ret == 2)
+			print_board(array);
+		else if (buffer[0] == 's')
 			print_state(array);
 		else if (buffer[0] == 'S')
 		{

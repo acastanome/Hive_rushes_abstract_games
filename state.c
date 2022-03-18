@@ -6,11 +6,60 @@
 /*   By: spuustin <spuustin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 19:58:46 by spuustin          #+#    #+#             */
-/*   Updated: 2022/03/18 21:09:19 by spuustin         ###   ########.fr       */
+/*   Updated: 2022/03/18 23:17:46 by spuustin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "santorini.h"
+
+void print_player_on_build(int index, int value)
+{
+	int pid;
+	
+	if (value % 10 != 0)
+	{
+		ft_putnbr(index + 1);
+		ft_putchar('.');
+		ft_putnbr(value % 10);
+		ft_putchar(' ');
+	}
+	if (value > 9)
+	{
+		pid = get_pid(value);
+		ft_putnbr(index + 1);
+		ft_putchar('.');
+		if (pid == 40)
+			ft_putchar('D');
+		if (pid == 30)
+			ft_putchar('C');
+		if (pid == 20)
+			ft_putchar('B');
+		if (pid == 10)
+			ft_putchar('A');
+		ft_putchar(' ');
+	}
+}
+
+void print_state(int *array)
+{
+	int i = 0;
+	
+	while (i < 25)
+	{
+		if (array[i] == 0)
+			i++;
+		else
+		{
+			print_player_on_build(i, array[i]);
+			i++;
+			while (array[i] == 0 && i < 25)
+			{
+				i++;
+			}
+		}
+	}
+	ft_putchar('\n');
+}
 
 void	populate(int *array)
 {
@@ -127,7 +176,7 @@ int		set_stage(int *array, char *buffer)
 			}
 			populate_builder(array, square - 1, builders, buffer[i]);
 		}
-		else if (buffer[i] >= '1' && buffer[i] <= '4')
+		else if (buffer[i] >= '1' && buffer[i] <= '5')
 		{
 			array[square - 1] += ft_atoi(buffer + i);
 		}

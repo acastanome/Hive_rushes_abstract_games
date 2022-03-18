@@ -6,7 +6,7 @@
 /*   By: spuustin <spuustin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 19:29:20 by spuustin          #+#    #+#             */
-/*   Updated: 2022/03/18 21:49:36 by spuustin         ###   ########.fr       */
+/*   Updated: 2022/03/18 22:16:52 by spuustin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,9 @@ int get_pid(int value)
 		return (30);
 	else if (value > 19)
 		return (20);
-	else
+	else if (value > 9)
 		return (10);
+	return (0);
 }
 
 int can_plr_move(int *array, int player)
