@@ -6,7 +6,7 @@
 /*   By: spuustin <spuustin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 14:25:38 by spuustin          #+#    #+#             */
-/*   Updated: 2022/03/19 01:15:43 by spuustin         ###   ########.fr       */
+/*   Updated: 2022/03/19 01:30:02 by acastano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,16 @@ int		main(void)
 	int turn = 1;
 
 	set_empty_stage(array);
-	ft_putstr("welcome to the game of Santorini!\n\n");
-	ft_putstr("T = play turn (T C 4 8 9)\n");
-	ft_putstr("S... = set stage (S 1.D 14.2 22.1 22.A ...)\n");
-	ft_putstr("P = print the current state.\n");
-	ft_putstr("PS = print the current state in string.\n");
-	ft_putstr("C = clear the state.\n");
-	ft_putstr("ENTER to exit.\n");
+	ft_putstr("\n\tWelcome to the game of Santorini!\n\n");
+
+	ft_putstr("\tOn their first turn, each player must place both builders (T A 3 B 10)\n\tAfter that:");
+	ft_putstr("\tT = play turn (T C 4 8 9)\n\t\t\t(T - player to move - where to move from - where to move to - where to build)\n");
+	ft_putstr("\tS = set stage (S 1.D 14.2 22.1 22.A ...)\n");
+	ft_putstr("\tP = print the current state.\n");
+	ft_putstr("\tPS = print the current state in string.\n");
+	ft_putstr("\tC = clear the state.\n");
+	ft_putstr("\tENTER to exit.\n\n");
+	ft_putstr("\n\tGo ahead, you can start playing now!\n\n");
 	while (ret != 1)
 	{
 		ret = read(STDIN_FILENO, buffer, 1000);
